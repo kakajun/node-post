@@ -1,0 +1,21 @@
+{
+  "name": "node-post",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "keywords": [
+    "node",
+    "axios",
+    "auto",
+    "excel"
+  ],
+  "scripts": {
+    "minify":"bash minify.bash"
+  },
+  "author": "kakajun <253495832@qq.com>",
+  "description": "用node脚本读取表格中的单元格内容, 然后模拟发送请求, 解决运维人员繁琐的批量操作",
+  "devDependencies": {
+    "node-xlsx" :"^0.24.0",
+    "axios":"1.7.2"
+  }
+}
