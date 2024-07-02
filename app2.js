@@ -2,6 +2,7 @@ import fs from 'fs';
 import postRequest from './request.js';
 import xlsx from 'node-xlsx';
 import 'dotenv/config'
+import {filterNames} from './utils.js';
 import { getParamsDl, getParamsDlData, test, serchData, getList } from './getParamsData2.js';
 // 读取Excel文件
 const buffer = fs.readFileSync('ceshi2.xls');
@@ -33,13 +34,19 @@ function getTotalList(aNum) {
  */
 function getCode(name, totalList, postName) {
   // 这里面已经是选中区的数据
-  console.log('name:', name);
+
   const regex =  /_PV(\d{1,2})/;
   const match = name.match(regex);
   if (match) {
     const sherchIndex = match[1]
-    console.log('匹配到的数字:', sherchIndex);
+    // console.log('匹配到的数字:', sherchIndex);
     const listName = `支路${postName}${sherchIndex}组串式`
+    // const names = totalList.map(o => o.cdName.replace('组串式',''))
+    // // console.log('names:', names);
+    // const similarNames = filterNames(names, name.replace('1_',''));
+    // console.log('name:', name);
+    // console.log('相似名称:', similarNames);
+    //  console.log('listName:', listName);
     const listObj = totalList.find(o => o.cdName == listName)
     const bm = listObj && listObj.id
     if (!bm) {
@@ -76,11 +83,11 @@ function posetData(totalList, aNum, postName) {
               // const bm = datas[0].data[0].dwbm
               const dataA = getParamsDl(sherchIndex, code, name, 3, bm)
               const dataB = getParamsDlData(sherchIndex, code, name, 3, arrear, bm)
-              await postRequest(dataA.api, dataA.params)
-              await postRequest(dataB.api, dataB.params)
+              // await postRequest(dataA.api, dataA.params)
+              // await postRequest(dataB.api, dataB.params)
               console.log('请求成功:', name, code, sherchIndex)
-              console.log(dataA);
-              console.log(dataB);
+              // console.log(dataA);
+              // console.log(dataB);
 
             } else {
               console.log(name, code, "不符合条件");
@@ -97,15 +104,12 @@ function posetData(totalList, aNum, postName) {
   });
 }
 
-
-
 async function main() {
   // 暂读几区
   const aNum = 1
+  // const postName = '电流'
   const postName = '电压'
-
   const totalList = await getTotalList(aNum)
-
   posetData(totalList, aNum, postName)
 
 }

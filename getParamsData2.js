@@ -79,12 +79,13 @@ export function getParamsDlData(index, code, name, road = 1, arrear, bm) {
     keywords.push(getmappingWord(cdModelName2));
     keywords.push(getmappingWord(cdModelName3));
   }
-  const keywordsSplit = `Z01-NB0${arrear}_PV${index}#`
+  // const keywordsSplit = `Z01-NB0${arrear}_PV${index}#`   PV2#NB01_PV2#
+  // const keywordsSplit =name.indexOf('电流') > -1 ? `PV${index}#NB0${arrear}_PV${index}#`: `Z01-NB0${arrear}_PV${index}#`
   return {
     api: updateMappStatus,
     params: {
       mappingWord: keywords.join(','),
-      keywordsSplit,
+      keywordsSplit:'',
       id: bm
     }
   }
@@ -112,7 +113,7 @@ export function getList() {
     "cdLx": "",
     "fdlx": 2,
     "page": 1,
-    "pageSize": 100,
+    "pageSize": 100000,
     "cdSxfl": "",
     "bjCode": ""
   }
