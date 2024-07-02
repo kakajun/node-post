@@ -136,5 +136,5 @@
     }
   },
   "eslint.validate": ["javascript", "html", "vue"],
-  "workbench.startupEditor": "welcomePage"
+  "workbench.startupEditor": "none"
 }

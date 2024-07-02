@@ -63,6 +63,8 @@ export function getParamsDlData(index, code, name, road = 1) {
     keywords.push(getmappingWord(cdModelName2));
   }
 
+
+
   return {
     api: api1,
     params: {
